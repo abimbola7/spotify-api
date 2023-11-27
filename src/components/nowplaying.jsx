@@ -1,9 +1,9 @@
 "use client"
 import { getLastPlayed } from "../../spotify";
 import React from 'react'
-const clientId = '230afaf01b8741bd8e345484f16eccc5';
-const clientSecret = '85c443bfc58b4f9c8fb2bf94f79fd0de';
-const refresh_token='AQAndcOIObQpe51Q8vAuuu5inuF2RKlZomaVt_yRfGBzGyDOAtuQzhnowNgKcbBIJltSot8qX5ieQR9c_Fvv_5RcmKTOwQ5zf_8HA0S3Z7DLaUVooZJ5qJqJuMr6zqdc9tw'
+const clientId = process.env.SPOTIFY_CLIENT_ID;
+const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN
 // import queryString from 'query-string';
 // import QueryString from 'qs';
 // import querystring from "querystring"
@@ -103,9 +103,9 @@ export default function NowPlaying () {
 //   //   fetchData();
 //   // }, []
 //   // );
-React.useEffect(()=>{
-  getLastPlayed(clientId, clientSecret, refresh_token)
-}, [])
+// React.useEffect(()=>{
+//   getLastPlayed(clientId, clientSecret, refresh_token)
+// }, [])
 //   return (
 //     <div>NowPlaying</div>
 //   )

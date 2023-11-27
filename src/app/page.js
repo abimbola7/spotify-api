@@ -1,5 +1,9 @@
+"use client"
+import LastPlayed from "@/components/lastplayed"
 import NowPlaying from "@/components/nowplaying"
+import Card from "@/components/ui/card"
 import React from "react"
+import { getLastPlayed } from "../../spotify";
 
 
 // {
@@ -11,9 +15,19 @@ import React from "react"
 // }
 
 
-export default async function Home() {
+export default function Home() {
+  const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
+  const clientSecret = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET;
+  const refresh_token = process.env.NEXT_PUBLIC_SPOTIFY_REFRESH_TOKEN
+  // const myprocess = process.env.MY_PRO
+  console.log(clientId, clientSecret, refresh_token)
+  const response  =  getLastPlayed(clientId, clientSecret, refresh_token)
+  console.log(response)
   return (
-    // <></>
-  <NowPlaying />
+    <>
+      {/* <Card /> */}
+      {/* <NowPlaying /> */}
+      <LastPlayed data={"data"}/>
+    </>
   )
 }

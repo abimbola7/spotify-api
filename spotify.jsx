@@ -8,6 +8,7 @@ const refresh_token='AQAndcOIObQpe51Q8vAuuu5inuF2RKlZomaVt_yRfGBzGyDOAtuQzhnowNg
 const tokenUrl = 'https://accounts.spotify.com/api/token';
 const LAST_PLAYED_ENDPOINT = `https://api.spotify.com/v1/me/player/recently-played?limit=1`;
 // const LAST_PLAYED_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
+let playlist_endpoint;
 
 
 const makeApiRequest = async (
@@ -53,6 +54,11 @@ export const getLastPlayed = async (
     client_secret,
     refresh_token
   );
-
   console.log(await res.json())
+  return await makeApiRequest(
+    LAST_PLAYED_ENDPOINT,
+    client_id,
+    client_secret,
+    refresh_token
+  );
 };
