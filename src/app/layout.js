@@ -1,8 +1,9 @@
-import { Inter } from 'next/font/google'
+import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import NextAuthSessionProvider from './provider/sessionProvider'
 
 const inter = Inter({ subsets: ['latin'] })
+const grotesk = Space_Grotesk({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Spotify Now Playing',
@@ -13,7 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <NextAuthSessionProvider>
-        <body className={`${inter.className} min-h-screen bg-[#292929] relative flex items-center justify-center`}>{children}</body>
+        <body className={`${grotesk.className} min-h-screen bg-[#292929] relative flex items-center justify-center`}>{children}</body>
       </NextAuthSessionProvider>
     </html>
   )
