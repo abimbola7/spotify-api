@@ -7,7 +7,7 @@ const clientSecret = '85c443bfc58b4f9c8fb2bf94f79fd0de';
 const refresh_token='AQAndcOIObQpe51Q8vAuuu5inuF2RKlZomaVt_yRfGBzGyDOAtuQzhnowNgKcbBIJltSot8qX5ieQR9c_Fvv_5RcmKTOwQ5zf_8HA0S3Z7DLaUVooZJ5qJqJuMr6zqdc9tw'
 const tokenUrl = 'https://accounts.spotify.com/api/token';
 const LAST_PLAYED_ENDPOINT = `https://api.spotify.com/v1/me/player/recently-played?limit=1`;
-// const LAST_PLAYED_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
+const current_song = `https://api.spotify.com/v1/me/player/currently-playing`;
 let playlist_endpoint;
 
 
@@ -62,3 +62,26 @@ export const getLastPlayed = async (
     refresh_token
   );
 };
+
+const getCurrentSong = async (
+  client_id,
+  client_secret,
+  refresh_token
+) => {
+  const res = await makeApiRequest(
+    current_song,
+    client_id,
+    client_secret,
+    refresh_token
+  );
+  console.log(await res.json())
+  return await makeApiRequest(
+    current_song,
+    client_id,
+    client_secret,
+    refresh_token
+  );
+};
+
+getCurrentSong(clientId, clientSecret, refresh_token)
+
