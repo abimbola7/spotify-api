@@ -1,3 +1,4 @@
+import Header from '@/components/header'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import NextAuthSessionProvider from './provider/sessionProvider'
@@ -14,7 +15,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <NextAuthSessionProvider>
-        <body className={`${grotesk.className}  bg-[#292929]`}>{children}</body>
+        <body className={`${grotesk.className}  bg-[#292929] min-h-screen`}>
+          {/* <Header /> */}
+          {children}
+        </body>
       </NextAuthSessionProvider>
     </html>
   )

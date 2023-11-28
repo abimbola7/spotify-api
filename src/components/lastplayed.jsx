@@ -3,6 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 import Card from './ui/card'
 import "./nowplaying.css"
+import Header from './header'
 
 export default function LastPlayed({ currentPlaying, lastPlayed, playlist }) {
   const getLastPlayed = () => {
@@ -12,25 +13,32 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist }) {
     const name = lastPlayed.items[0].track.name; 
     // const name = lastPlayed.items[0].track.album.images
     return (
-      <Card>
-        <Image
-        src={src}
-        alt={"album cover"}
-        height={500}
-        width={500}
-        className="rounded-lg"
+      <div className='flex items-center justify-center min-h-screen'>  
+        <Header
+         currentPlaying={currentPlaying}
+         lastPlayed={lastPlayed}
+         playlist={playlist}
         />
-        <div className='text-center mt-4'>
-          <ul className=''>
-            {
-              artists.map(artist=>(
-                <li key={artist.name}>{artist.name}</li>
-              ))
-            }
-          </ul>
-          <h1 className='uppercase text-xl font-medium'>{ name }</h1>
-        </div>
-      </Card>
+        <Card>
+          <Image
+          src={src}
+          alt={"album cover"}
+          height={500}
+          width={500}
+          className="rounded-lg"
+          />
+          <div className='text-center mt-4'>
+            <ul className=''>
+              {
+                artists.map(artist=>(
+                  <li key={artist.name}>{artist.name}</li>
+                ))
+              }
+            </ul>
+            <h1 className='uppercase text-xl font-medium'>{ name }</h1>
+          </div>
+        </Card>
+      </div>
     )
   }
   const getCurrentPlayed = () => {
@@ -53,6 +61,11 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist }) {
       className={`w-full bg-cover bg-no-repeat min-h-screen flex items-center justify-center`}>
       </div>
       <div className='w-full bg-cover bg-no-repeat min-h-screen flex items-center justify-center backdrop-blur-lg'>
+        <Header
+         currentPlaying={currentPlaying}
+         lastPlayed={lastPlayed}
+         playlist={playlist}
+        />
         <Card>
           <Image
           src={src}
@@ -91,17 +104,9 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist }) {
     return (
       getCurrentPlayed()
     )
+  } else {
+    return (
+      getLastPlayed()
+    )
   }
-  // return (
-  //   <>
-  //     {
-  //       typeof currentPlaying === "object" && (
-  //         getCurrentPlayed()
-  //       ) 
-  //     }
-  //   </>
-  //   // <Card>
-
-  //   // </Card>
-  // )
 }

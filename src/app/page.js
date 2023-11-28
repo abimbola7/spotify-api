@@ -40,7 +40,7 @@ const makeApiRequest = async (
 };
 
 
-const getLastPlayed = async (
+export const getLastPlayed = async (
   client_id,
   client_secret,
   refresh_token
@@ -54,7 +54,7 @@ const getLastPlayed = async (
   return await res.json();
 };
 
-const getPlaylist = async (
+export const getPlaylist = async (
   client_id,
   client_secret,
   refresh_token, 
@@ -70,7 +70,7 @@ const getPlaylist = async (
   return await res.json();
 };
 
-const getCurrentSong = async (
+export const getCurrentSong = async (
   client_id,
   client_secret,
   refresh_token
