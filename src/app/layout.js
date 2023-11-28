@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <NextAuthSessionProvider>
-        <body className={`${grotesk.className} min-h-screen bg-[#292929] relative flex items-center justify-center`}>{children}</body>
+        <body className={`${grotesk.className}  bg-[#292929]`}>{children}</body>
       </NextAuthSessionProvider>
     </html>
   )

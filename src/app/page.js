@@ -4,7 +4,8 @@ import queryString from 'query-string';
 const tokenUrl = 'https://accounts.spotify.com/api/token';
 const LAST_PLAYED_ENDPOINT = `https://api.spotify.com/v1/me/player/recently-played?limit=1`;
 const current_song = `https://api.spotify.com/v1/me/player/currently-playing`;
-
+// let playlist_id;
+// const playlist_endpoint = `https://api.spotify.com/v1/playlists/${playlist_id}`
 const makeApiRequest = async (
   endpoint,
   client_id,
@@ -53,6 +54,22 @@ const getLastPlayed = async (
   return await res.json();
 };
 
+const getPlaylist = async (
+  client_id,
+  client_secret,
+  refresh_token, 
+  id
+) => {
+  console.log(id, "IIIIIIIIID")
+  const res = await makeApiRequest(
+    'https://api.spotify.com/v1/playlists/' + id,
+    client_id,
+    client_secret,
+    refresh_token,
+  );
+  return await res.json();
+};
+
 const getCurrentSong = async (
   client_id,
   client_secret,
@@ -65,7 +82,11 @@ const getCurrentSong = async (
     refresh_token,
   );
   if (res.ok && res.status === 200) {
-    return await res.json()
+    const data = await res.json();
+    const playlist_id = await (data.context?.uri).split(":")[2]
+    const playss = await getPlaylist(client_id,client_secret,refresh_token,playlist_id)
+    return {data, playss};
+    // return await res.json()
   } else
   if (res.ok && res.status === 204) {
     return "offline"
@@ -80,17 +101,21 @@ export default async function Home() {
   const clientId = process.env.SPOTIFY_CLIENT_ID;
   const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
   const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN
-  // const currentPlayingData = await getCurrentSong(clientId, clientSecret, refresh_token)
+  const {data:currentPlayingData, playss} = await getCurrentSong(clientId, clientSecret, refresh_token)
+  console.log(playss, "JHDFHKFKKJFKJ")
   const lastPlayedData = await getLastPlayed(clientId, clientSecret, refresh_token)
+  // const playlists = await getPlaylist(clientId, clientSecret, refresh_token)
+  // console.log(playlists, "PLAYLOSYYYYYYTTTT")
   // console.log(currentPlayingData)
   // console.log(currentPlayingData?.item?.name)
-  console.log(lastPlayedData.items[0].track.name)
+  // console.log(lastPlayedData.items[0].track.name)
 
   return (
     <>
       <LastPlayed
-      // currentPlaying={currentPlayingData}
+      currentPlaying={currentPlayingData}
       lastPlayed={lastPlayedData}
+      playlist={playss}
       />
     </>
   )
