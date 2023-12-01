@@ -81,14 +81,14 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist }) {
     style={{
       backgroundImage : `url(${src || "black"})`,
     }}
-    className={`w-full bg-cover bg-no-repeat h-screen`}>
-      <div className='w-full bg-cover bg-no-repeat backdrop-blur-lg h-full flex flex-col'>
+    className={`w-full bg-cover bg-no-repeat min-h-screen`}>
+      <div className='w-full bg-cover bg-no-repeat backdrop-blur-lg min-h-screen flex flex-col'>
         <Header
           currentPlaying={currentPlaying}
           lastPlayed={lastPlayed}
         />
         <div
-        className='flex items-center justify-center flex-1 border border-red-500'
+        className='flex items-center justify-center flex-1'
         >
           {
             typeof currentPlaying === "object" ? (
