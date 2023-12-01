@@ -62,7 +62,6 @@ export const getPlaylist = async (
   refresh_token, 
   id
 ) => {
-  console.log(id, "IIIIIIIIID")
   const res = await makeApiRequest(
     'https://api.spotify.com/v1/playlists/' + id,
     client_id,

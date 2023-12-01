@@ -4,10 +4,12 @@ import React from 'react'
 import Card from './ui/card'
 import "./nowplaying.css"
 import Header from './header'
+import Footer from './footer'
 
 
 
 export default function LastPlayed({ currentPlaying, lastPlayed, playlist }) {
+  console.log(currentPlaying)
   const src =  currentPlaying?.item?.album?.images[0]?.url || lastPlayed.items[0].track.album.images[0].url; 
   const getLastPlayed = () => {
     console.log(lastPlayed.items[0].played_at)
@@ -81,7 +83,7 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist }) {
     style={{
       backgroundImage : `url(${src || "black"})`,
     }}
-    className={`w-full bg-cover bg-no-repeat min-h-screen`}>
+    className={`w-full bg-cover bg-no-repeat min-h-screen bg-center`}>
       <div className='w-full bg-cover bg-no-repeat backdrop-blur-lg min-h-screen flex flex-col'>
         <Header
           currentPlaying={currentPlaying}
@@ -98,7 +100,7 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist }) {
             )
           }
         </div>
-        <Header
+        <Footer
           currentPlaying={currentPlaying}
           lastPlayed={lastPlayed}
         />
