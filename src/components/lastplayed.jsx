@@ -5,108 +5,113 @@ import Card from './ui/card'
 import "./nowplaying.css"
 import Header from './header'
 
+
+
 export default function LastPlayed({ currentPlaying, lastPlayed, playlist }) {
+  const src =  currentPlaying?.item?.album?.images[0]?.url || lastPlayed.items[0].track.album.images[0].url; 
   const getLastPlayed = () => {
     console.log(lastPlayed.items[0].played_at)
     const artists = lastPlayed.items[0].track.artists
-    const src = lastPlayed.items[0].track.album.images[0].url; 
     const name = lastPlayed.items[0].track.name; 
-    // const name = lastPlayed.items[0].track.album.images
+
     return (
-      <div className='flex items-center justify-center min-h-screen'>  
-        <Header
-         currentPlaying={currentPlaying}
-         lastPlayed={lastPlayed}
-         playlist={playlist}
+      <Card>
+        <Image
+        src={src}
+        alt={"album cover"}
+        height={500}
+        width={500}
+        className="rounded-lg"
         />
-        <Card>
-          <Image
-          src={src}
-          alt={"album cover"}
-          height={500}
-          width={500}
-          className="rounded-lg"
-          />
-          <div className='text-center mt-4'>
-            <ul className=''>
-              {
-                artists.map(artist=>(
-                  <li key={artist.name}>{artist.name}</li>
-                ))
-              }
-            </ul>
-            <h1 className='uppercase text-xl font-medium'>{ name }</h1>
-          </div>
-        </Card>
-      </div>
+        <div className='text-center mt-4'>
+          <ul className=''>
+            {
+              artists.map(artist=>(
+                <li key={artist.name}>{artist.name}</li>
+              ))
+            }
+          </ul>
+          <h1 className='uppercase text-xl font-medium'>{ name }</h1>
+        </div>
+      </Card>
     )
   }
   const getCurrentPlayed = () => {
     const artists = currentPlaying.item.artists
     const src = currentPlaying.item.album.images[0].url; 
     const name = currentPlaying.item.name;
-    const playlistSrc = playlist.images[0].url
-    const playlistName = playlist.name
-    console.log(playlist.images[0].url)
+    // const playlistSrc = playlist?.images[0]?.url
+    // const playlistName = playlist?.name
+    // console.log(playlist.images[0].url)
     return (
-      <>
-      <div 
-      style={{
-        position : "absolute",
-        top : "0",
-        z : -1000,
-        backgroundImage : `url(${src})`,
-        backgroundBlendMode : "darken",
-      }}
-      className={`w-full bg-cover bg-no-repeat min-h-screen flex items-center justify-center`}>
+    <Card>
+      <Image
+      src={src}
+      alt={"album cover"}
+      height={500}
+      width={500}
+      className="rounded-lg duration-200 transition-transform hover:scale-105"
+      />
+      <div className='text-center mt-4'>
+        <ul className=''>
+          {
+            artists.map(artist=>(
+              <li key={artist.name}>{artist.name}</li>
+            ))
+          }
+        </ul>
+        <h1 className='uppercase text-2xl font-medium'>{ name }</h1>
       </div>
-      <div className='w-full bg-cover bg-no-repeat min-h-screen flex items-center justify-center backdrop-blur-lg'>
-        <Header
-         currentPlaying={currentPlaying}
-         lastPlayed={lastPlayed}
-         playlist={playlist}
+      {/* <div className='flex justify-center items-center flex-col space-y-3 absolute bottom-0'>
+        <Image 
+        src={playlistSrc}
+        alt="playlist"
+        width={50}
+        height={50}
+        className="rounded-full"
         />
-        <Card>
-          <Image
-          src={src}
-          alt={"album cover"}
-          height={500}
-          width={500}
-          className="rounded-lg duration-200 transition-transform hover:scale-105"
-          />
-          <div className='text-center mt-4'>
-            <ul className=''>
-              {
-                artists.map(artist=>(
-                  <li key={artist.name}>{artist.name}</li>
-                ))
-              }
-            </ul>
-            <h1 className='uppercase text-2xl font-medium'>{ name }</h1>
-          </div>
-          <div className='flex justify-center items-center flex-col space-y-3 absolute bottom-0'>
-            <Image 
-            src={playlistSrc}
-            alt="playlist"
-            width={50}
-            height={50}
-            className="rounded-full"
-            />
-            <p>{playlistName}</p>
-          </div>
-        </Card>
-      </div>
-      </>
+        <p>{playlistName}</p>
+      </div> */}
+    </Card>
     )
   }
 
-  if (typeof currentPlaying === "object") {
-    return (
-      getCurrentPlayed()
-    )
-  } else {
-    return (
-      getLastPlayed()
-    )
-  }
+  return (
+    <div 
+    style={{
+      backgroundImage : `url(${src || "black"})`,
+    }}
+    className={`w-full bg-cover bg-no-repeat h-screen`}>
+      <div className='w-full bg-cover bg-no-repeat backdrop-blur-lg h-full flex flex-col'>
+        <Header
+          currentPlaying={currentPlaying}
+          lastPlayed={lastPlayed}
+        />
+        <div
+        className='flex items-center justify-center flex-1 border border-red-500'
+        >
+          {
+            typeof currentPlaying === "object" ? (
+              getCurrentPlayed()
+            ) : ( 
+              getLastPlayed()
+            )
+          }
+        </div>
+        <Header
+          currentPlaying={currentPlaying}
+          lastPlayed={lastPlayed}
+        />
+      </div>
+    </div>
+  )
+  // if (typeof currentPlaying === "object") {
+  //   return (
+  //     getCurrentPlayed()
+  //   )
+  // } else {
+  //   return (
+  //     getLastPlayed()
+  //   )
+  // }
 }

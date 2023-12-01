@@ -1,6 +1,8 @@
 import LastPlayed from "@/components/lastplayed"
 import React from "react"
 import queryString from 'query-string';
+import GetTracks from "@/components/gettracks";
+import Header from "@/components/header";
 const tokenUrl = 'https://accounts.spotify.com/api/token';
 const LAST_PLAYED_ENDPOINT = `https://api.spotify.com/v1/me/player/recently-played?limit=1`;
 const current_song = `https://api.spotify.com/v1/me/player/currently-playing`;
@@ -111,12 +113,10 @@ export default async function Home() {
   // console.log(lastPlayedData.items[0].track.name)
 
   return (
-    <>
       <LastPlayed
       currentPlaying={currentPlayingData}
       lastPlayed={lastPlayedData}
       playlist={playss}
       />
-    </>
   )
 }

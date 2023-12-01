@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <NextAuthSessionProvider>
-        <body className={`${grotesk.className}  bg-[#292929] min-h-screen`}>
+        <body className={`${grotesk.className}`}>
           {/* <Header /> */}
           {children}
         </body>
