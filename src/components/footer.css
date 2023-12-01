@@ -1,0 +1,17 @@
+@keyframes moveText {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%); /* Move the text across the full width of the viewport */
+  }
+}
+
+.moving-text {
+  white-space:no-wrap;
+  animation: moveText 20s linear infinite; /* Adjust the duration as needed */
+}
+
+.moving-text:hover{
+  animation-play-state: paused;
+}

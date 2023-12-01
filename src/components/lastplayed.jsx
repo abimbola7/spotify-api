@@ -9,10 +9,10 @@ import Footer from './footer'
 
 
 export default function LastPlayed({ currentPlaying, lastPlayed, playlist }) {
-  console.log(currentPlaying)
+  console.log(playlist)
   const src =  currentPlaying?.item?.album?.images[0]?.url || lastPlayed.items[0].track.album.images[0].url; 
   const getLastPlayed = () => {
-    console.log(lastPlayed.items[0].played_at)
+    // console.log(lastPlayed.items[0].played_at)
     const artists = lastPlayed.items[0].track.artists
     const name = lastPlayed.items[0].track.name; 
 
@@ -42,9 +42,9 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist }) {
     const artists = currentPlaying.item.artists
     const src = currentPlaying.item.album.images[0].url; 
     const name = currentPlaying.item.name;
-    // const playlistSrc = playlist?.images[0]?.url
-    // const playlistName = playlist?.name
-    // console.log(playlist.images[0].url)
+    const playlistSrc = playlist?.images[0]?.url
+    const playlistName = playlist?.name
+    console.log(playlist.images[0].url)
     return (
     <Card>
       <Image
@@ -55,25 +55,25 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist }) {
       className="rounded-lg duration-200 transition-transform hover:scale-105"
       />
       <div className='text-center mt-4'>
-        <ul className=''>
-          {
-            artists.map(artist=>(
-              <li key={artist.name}>{artist.name}</li>
-            ))
-          }
-        </ul>
+        <div className='my-2'>
+        {
+          artists?.map((artist, i)=>(
+            <>
+              <span>
+              {artist.name}
+              {artists.length - 1 === i ? 
+              "" : 
+              <span>
+              {","} &nbsp;
+              </span> 
+              }
+              </span>
+            </>
+          ))
+        }
+        </div>
         <h1 className='uppercase text-2xl font-medium'>{ name }</h1>
       </div>
-      {/* <div className='flex justify-center items-center flex-col space-y-3 absolute bottom-0'>
-        <Image 
-        src={playlistSrc}
-        alt="playlist"
-        width={50}
-        height={50}
-        className="rounded-full"
-        />
-        <p>{playlistName}</p>
-      </div> */}
     </Card>
     )
   }
@@ -103,6 +103,7 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist }) {
         <Footer
           currentPlaying={currentPlaying}
           lastPlayed={lastPlayed}
+          playlbum={playlist}
         />
       </div>
     </div>

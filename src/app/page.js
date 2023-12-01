@@ -71,6 +71,21 @@ export const getPlaylist = async (
   return await res.json();
 };
 
+export const getAlbum = async (
+  client_id,
+  client_secret,
+  refresh_token, 
+  id
+) => {
+  const res = await makeApiRequest(
+    'https://api.spotify.com/v1/albums/' + id,
+    client_id,
+    client_secret,
+    refresh_token,
+  );
+  return await res.json();
+};
+
 export const getCurrentSong = async (
   client_id,
   client_secret,
@@ -84,8 +99,15 @@ export const getCurrentSong = async (
   );
   if (res.ok && res.status === 200) {
     const data = await res.json();
-    const playlist_id = await (data.context?.uri).split(":")[2]
-    const playss = await getPlaylist(client_id,client_secret,refresh_token,playlist_id)
+    const uri = await (data.context?.uri).split(":")
+    let playss
+    if (uri[1] === "album") {
+      const album_id = uri[2]
+      playss = await getAlbum(client_id,client_secret,refresh_token,album_id)  
+    } else if (uri[1] === "playlist"){
+      const playlist_id = uri[2]
+      playss = await getPlaylist(client_id,client_secret,refresh_token,playlist_id)  
+    }
     return {data, playss};
     // return await res.json()
   } else
@@ -103,13 +125,7 @@ export default async function Home() {
   const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
   const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN
   const {data:currentPlayingData, playss} = await getCurrentSong(clientId, clientSecret, refresh_token)
-  console.log(playss, "JHDFHKFKKJFKJ")
   const lastPlayedData = await getLastPlayed(clientId, clientSecret, refresh_token)
-  // const playlists = await getPlaylist(clientId, clientSecret, refresh_token)
-  // console.log(playlists, "PLAYLOSYYYYYYTTTT")
-  // console.log(currentPlayingData)
-  // console.log(currentPlayingData?.item?.name)
-  // console.log(lastPlayedData.items[0].track.name)
 
   return (
       <LastPlayed

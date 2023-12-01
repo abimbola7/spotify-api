@@ -1,16 +1,16 @@
 "use client"
 
 import React from 'react'
-import moment from 'moment'
+import moment from 'moment';
+import Link from 'next/link';
 
-export default function Footer({ currentPlaying, lastPlayed }) {
+export default function Footer({ currentPlaying, lastPlayed, playlbum }) {
   const [ time, setTime ] = React.useState(moment(lastPlayed.items[0].played_at ).fromNow())
-  console.log(lastPlayed.items  )
+  console.log(playlbum)
   React.useEffect(()=>{
     const getDate = () => {
       const date  = moment(lastPlayed.items[0].played_at ).fromNow()
       setTime(date)
-      // console.log(date)
     }
     const interval = setInterval(getDate,10000);
     return () => {
@@ -19,14 +19,27 @@ export default function Footer({ currentPlaying, lastPlayed }) {
   }, [])
 
   return (
-    <div className='grid grid-rows-2 sm:grid-rows-none sm:grid-cols-3 text-white mb-2 items-center px-3 justify-items-center'>
-      <div className='col-span-1 sm:col-span-2 text-left sm:text-center text-sm'>
+    <div className='flex flex-col sm:flex-row text-white mb-2 items-center px-3 justify-between mx-auto w-full'>
+      <div className='text-left sm:text-center text-sm sm:w-[32%]'>
         <p>Songs I&apos;m listening to on Spotify</p>
       </div>
-      <div className='text-center'>
-        <span>Last seen 👀</span> <br/>
-        <span className='bg-[#1DB954] py-1 px-2 text-xs ml-3 rounded-md'>{time}</span>
-      </div>
+      {
+        currentPlaying && (
+          <div className='flex space-x-2 truncate w-full'>
+            <div className='overflow-hidden  mx-auto'>
+              <Link href={playlbum?.external_urls?.spotify} target="_blank" className='duration-200 transition-colors hover:text-[#1DB954]'>Playing from {playlbum.name}</Link>
+            </div>
+          </div>    
+        )
+      }
+      {
+        !currentPlaying && (
+          <div className='text-center sm:w-[32%]'>
+            <span>Last seen 👀</span> <br/>
+            <span className='bg-[#1DB954] py-1 px-2 text-xs ml-3 rounded-md'>{time}</span>
+          </div>
+        )
+      }
     </div>
   )
 }
