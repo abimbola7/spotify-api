@@ -2,7 +2,6 @@
 import Image from 'next/image'
 import React from 'react'
 import Card from './ui/card'
-import "./nowplaying.css"
 import Header from './header'
 import Footer from './footer'
 import Link from 'next/link'
