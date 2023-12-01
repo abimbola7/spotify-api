@@ -16,7 +16,7 @@ export default function Header({ currentPlaying, lastPlayed, playlist }) {
       </Link>
       <div className='p-2 bg-white text-black rounded-lg'>
         {
-          currentPlaying?.is_playing ? (
+          currentPlaying ? (
             'ONLINE'
           ) : (
             'OFFLINE'

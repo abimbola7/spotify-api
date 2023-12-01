@@ -31,7 +31,7 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist, profi
           <div className='my-2'>
             {
               artists?.map((artist, i)=>(
-                <div key={artist.name}>
+                <>
                   <span>
                   {artist.name}
                   {artists.length - 1 === i ? 
@@ -41,7 +41,7 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist, profi
                   </span> 
                   }
                   </span>
-                </div>
+                </>
               ))
             }
           </div>
@@ -57,7 +57,7 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist, profi
     const url = currentPlaying.item.external_urls.spotify
     return (
     <Card>
-      <Link href={url} target="_blank">
+      <Link href={url} target="_blank" className='mb-1'>
         <Image
         src={src}
         alt={"album cover"}
@@ -67,11 +67,11 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist, profi
         />
       </Link>
       <Loader />
-      <div className='text-center mt-4'>
+      <div className='text-center mt-2'>
         <div className='my-2'>
         {
           artists?.map((artist, i)=>(
-            <div key={artist.name}>
+            <>
               <span>
               {artist.name}
               {artists.length - 1 === i ? 
@@ -81,7 +81,7 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist, profi
               </span> 
               }
               </span>
-            </div>
+            </>
           ))
         }
         </div>
