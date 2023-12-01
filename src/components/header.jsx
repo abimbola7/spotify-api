@@ -5,7 +5,7 @@ import moment from 'moment'
 
 export default function Header({ currentPlaying, lastPlayed, playlist }) {
   return (
-    <div className='w-full p-5 font-medium text-white flex items-center justify-between text-xs sm:text-lg'>
+    <div className='w-full p-5 font-medium text-[#e6e6e6] flex items-center justify-between text-xs sm:text-lg'>
       <Link 
       href="https://www.github.com/abimbola7" 
       target={"_blank"}

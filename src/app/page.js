@@ -1,24 +1,18 @@
 import LastPlayed from "@/components/lastplayed"
 import React from "react"
 import queryString from 'query-string';
-import GetTracks from "@/components/gettracks";
-import Header from "@/components/header";
 const tokenUrl = 'https://accounts.spotify.com/api/token';
-const LAST_PLAYED_ENDPOINT = `https://api.spotify.com/v1/me/player/recently-played?limit=1`;
+const lastPlayedEndpoint = `https://api.spotify.com/v1/me/player/recently-played?limit=1`;
 const current_song = `https://api.spotify.com/v1/me/player/currently-playing`;
-// let playlist_id;
-// const playlist_endpoint = `https://api.spotify.com/v1/playlists/${playlist_id}`
-const makeApiRequest = async (
-  endpoint,
-  client_id,
-  client_secret,
-  refresh_token
-  ) => {
-  const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
+const my_profile = `https://api.spotify.com/v1/me`
 
+
+const makeApiRequest = async (endpoint,client_id,client_secret,refresh_token) => {
+  const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
   const response = await fetch(tokenUrl, {
     method: "POST",
-    cache : "no-store",
+    // cache : "no-store",
+    next : { revalidate : 10 },
     headers: {
       Authorization: `Basic ${basic}`,
       "Content-Type": "application/x-www-form-urlencoded",
@@ -42,13 +36,9 @@ const makeApiRequest = async (
 };
 
 
-export const getLastPlayed = async (
-  client_id,
-  client_secret,
-  refresh_token
-) => {
+export const getProfile = async (client_id, client_secret, refresh_token) => {
   const res = await makeApiRequest(
-    LAST_PLAYED_ENDPOINT,
+    my_profile,
     client_id,
     client_secret,
     refresh_token,
@@ -56,12 +46,17 @@ export const getLastPlayed = async (
   return await res.json();
 };
 
-export const getPlaylist = async (
-  client_id,
-  client_secret,
-  refresh_token, 
-  id
-) => {
+export const getLastPlayed = async (client_id, client_secret, refresh_token) => {
+  const res = await makeApiRequest(
+    lastPlayedEndpoint,
+    client_id,
+    client_secret,
+    refresh_token,
+  );
+  return await res.json();
+};
+
+export const getPlaylist = async (client_id, client_secret, refresh_token, id) => {
   const res = await makeApiRequest(
     'https://api.spotify.com/v1/playlists/' + id,
     client_id,
@@ -71,12 +66,7 @@ export const getPlaylist = async (
   return await res.json();
 };
 
-export const getAlbum = async (
-  client_id,
-  client_secret,
-  refresh_token, 
-  id
-) => {
+export const getAlbum = async (client_id, client_secret, refresh_token, id) => {
   const res = await makeApiRequest(
     'https://api.spotify.com/v1/albums/' + id,
     client_id,
@@ -86,11 +76,7 @@ export const getAlbum = async (
   return await res.json();
 };
 
-export const getCurrentSong = async (
-  client_id,
-  client_secret,
-  refresh_token
-) => {
+export const getCurrentSong = async (client_id,client_secret,refresh_token) => {
   const res = await makeApiRequest(
     current_song,
     client_id,
@@ -126,12 +112,13 @@ export default async function Home() {
   const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN
   const {data:currentPlayingData, playss} = await getCurrentSong(clientId, clientSecret, refresh_token)
   const lastPlayedData = await getLastPlayed(clientId, clientSecret, refresh_token)
-
+  const profile = await getProfile(clientId, clientSecret, refresh_token)
   return (
       <LastPlayed
       currentPlaying={currentPlayingData}
       lastPlayed={lastPlayedData}
       playlist={playss}
+      profile={profile}
       />
   )
 }

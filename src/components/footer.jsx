@@ -4,9 +4,9 @@ import React from 'react'
 import moment from 'moment';
 import Link from 'next/link';
 
-export default function Footer({ currentPlaying, lastPlayed, playlbum }) {
+export default function Footer({ currentPlaying, lastPlayed, playlbum, profile}) {
+  const userLink = profile.external_urls.spotify
   const [ time, setTime ] = React.useState(moment(lastPlayed.items[0].played_at ).fromNow())
-  console.log(playlbum)
   React.useEffect(()=>{
     const getDate = () => {
       const date  = moment(lastPlayed.items[0].played_at ).fromNow()
@@ -19,9 +19,11 @@ export default function Footer({ currentPlaying, lastPlayed, playlbum }) {
   }, [])
 
   return (
-    <div className='flex flex-col sm:flex-row text-white mb-2 items-center px-3 justify-between mx-auto w-full'>
+    <div className='flex flex-col sm:flex-row text-[#e6e6e6] mb-2 items-center px-3 justify-between mx-auto w-full'>
       <div className='text-left sm:text-center text-sm sm:w-[32%]'>
-        <p>Songs I&apos;m listening to on Spotify</p>
+        <p>Songs I&apos;m listening to on 
+        <Link href={userLink} target="_blank" className='duration-200 transition-colors hover:text-[#1DB954]'> Spotify</Link>
+        </p>
       </div>
       {
         currentPlaying && (
