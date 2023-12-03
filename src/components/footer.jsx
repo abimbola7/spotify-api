@@ -22,20 +22,14 @@ export default function Footer({ currentPlaying, lastPlayed, playlbum, profile})
     <div className='flex flex-col sm:flex-row text-[#e6e6e6] mb-2 items-center px-3 justify-between mx-auto w-full'>
       <div className='text-left sm:text-center text-sm sm:w-[32%]'>
         <p>Songs I&apos;m listening to on 
-        <Link href={userLink} target="_blank" className='duration-200 transition-colors text-[#1DB954] hover:text-[#1DB954]'> Spotify</Link>
+        <Link href={userLink} target="_blank" className='text-[#1DB954] duration-200 transition-colors text-[#1DB954] hover:text-[#1DB954]'> Spotify</Link>
         </p>
       </div>
       {
         currentPlaying && (
           <div className='flex space-x-2 truncate w-full'>
             <div className='overflow-hidden  mx-auto'>
-              <span>Playing from </span>
-              <Link 
-              href={playlbum?.external_urls?.spotify} 
-              target="_blank" 
-              className='duration-200 transition-colors hover:text-[#1DB954] text-[#1DB954] font-medium'>
-               {playlbum.name}
-              </Link>
+              <Link href={playlbum?.external_urls?.spotify} target="_blank" className='text-[#1DB954] duration-200 transition-colors hover:text-[#1DB954]'>Playing from {playlbum.name}</Link>
             </div>
           </div>    
         )
