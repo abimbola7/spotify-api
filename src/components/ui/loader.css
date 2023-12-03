@@ -2,11 +2,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: fit-content;
 }
 
 #wave {
-  height: 70px;
+  height: 40px;
   width: 70px;
   fill: #1DB954;
 }

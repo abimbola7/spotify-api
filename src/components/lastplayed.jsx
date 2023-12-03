@@ -98,6 +98,7 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist, profi
     <div 
     style={{
       backgroundImage : `url(${currentSrc || "#121212"})`,
+      backgroundBlendMode : "darken"
     }}
     className={`w-full bg-cover bg-no-repeat min-h-screen bg-center`}>
       <div className='w-full bg-cover bg-no-repeat backdrop-blur-lg min-h-screen flex flex-col'>
