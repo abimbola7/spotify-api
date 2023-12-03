@@ -29,7 +29,7 @@ export default function Footer({ currentPlaying, lastPlayed, playlbum, profile})
         currentPlaying && (
           <div className='flex space-x-2 truncate w-full'>
             <div className='overflow-hidden  mx-auto'>
-              <span>Playing from</span>
+              <span>Playing from </span>
               <Link 
               href={playlbum?.external_urls?.spotify} 
               target="_blank" 
