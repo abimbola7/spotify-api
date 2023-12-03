@@ -29,7 +29,13 @@ export default function Footer({ currentPlaying, lastPlayed, playlbum, profile})
         currentPlaying && (
           <div className='flex space-x-2 truncate w-full'>
             <div className='overflow-hidden  mx-auto'>
-              <Link href={playlbum?.external_urls?.spotify} target="_blank" className='text-[#1DB954] duration-200 transition-colors hover:text-[#1DB954]'>Playing from {playlbum.name}</Link>
+              <span>Playing from</span>
+              <Link 
+              href={playlbum?.external_urls?.spotify} 
+              target="_blank" 
+              className='text-[#1DB954] duration-200 transition-colors hover:text-[#1DB954]'>
+                {playlbum.name}
+              </Link>
             </div>
           </div>    
         )
