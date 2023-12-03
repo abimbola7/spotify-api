@@ -9,7 +9,7 @@ export default function Header({ currentPlaying, lastPlayed, playlist }) {
       <Link 
       href="https://www.github.com/abimbola7" 
       target={"_blank"}
-      className="duration-200 transition-colors hover:text-[#1DB954]"
+      className="text-[#1DB954] duration-200 transition-colors hover:text-[#1DB954]"
       >
         ABIMBOLA <br/>
         OLADOSU
