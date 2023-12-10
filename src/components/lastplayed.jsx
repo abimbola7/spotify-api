@@ -24,10 +24,10 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist, profi
           alt={"album cover"}
           height={500}
           width={500}
-          className="rounded-lg duration-200 transition-transform hover:scale-105"
+          className="transition-transform duration-200 rounded-lg hover:scale-105"
           />
         </Link>
-        <div className='text-center mt-4'>
+        <div className='mt-4 text-center'>
           <div className='my-2'>
             {
               artists?.map((artist, i)=>(
@@ -45,7 +45,7 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist, profi
               ))
             }
           </div>
-          <h1 className='uppercase text-xl font-medium'>{ name }</h1>
+          <h1 className='text-xl font-medium uppercase'>{ name }</h1>
         </div>
       </Card>
     )
@@ -63,11 +63,11 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist, profi
         alt={"album cover"}
         height={500}
         width={500}
-        className="rounded-lg duration-200 transition-transform hover:scale-105"
+        className="transition-transform duration-200 rounded-lg hover:scale-105"
         />
       </Link>
       <Loader />
-      <div className='text-center mt-2'>
+      <div className='mt-2 text-center'>
         <div className='my-2'>
         {
           artists?.map((artist, i)=>(
@@ -85,7 +85,7 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist, profi
           ))
         }
         </div>
-        <h1 className='uppercase text-2xl font-medium'>{ name }</h1>
+        <h1 className='text-2xl font-medium uppercase'>{ name }</h1>
       </div>
     </Card>
     )
@@ -97,11 +97,12 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist, profi
   return (
     <div 
     style={{
-      backgroundImage : `url(${currentSrc || "#121212"})`,
+      backgroundImage : `linear-gradient(to top, rgba(0, 0, 0, 0.5) , rgba(0, 0, 0, 0.5)), url(${currentSrc || "#121212"})`,
       backgroundBlendMode : "darken"
+      
     }}
     className={`w-full bg-cover bg-no-repeat min-h-screen bg-center`}>
-      <div className='w-full bg-cover bg-no-repeat backdrop-blur-lg min-h-screen flex flex-col'>
+      <div className='flex flex-col w-full min-h-screen bg-no-repeat bg-cover backdrop-blur-lg'>
         <Header
           currentPlaying={currentPlaying}
           lastPlayed={lastPlayed}
