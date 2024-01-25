@@ -1,3 +1,5 @@
+export const revalidate = 60
+
 import LastPlayed from "@/components/lastplayed"
 import React from "react"
 import queryString from 'query-string';
