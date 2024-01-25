@@ -13,7 +13,7 @@ const makeApiRequest = async (endpoint,client_id,client_secret,refresh_token) =>
   const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
   const response = await fetch(tokenUrl, {
     method: "POST",
-    // cache : "no-store",
+    cache : "no-store",
     // next : { revalidate : 10 },
     headers: {
       Authorization: `Basic ${basic}`,
