@@ -1,4 +1,4 @@
-export const revalidate = 60
+// "so whats wrong 😂"
 
 import LastPlayed from "@/components/lastplayed"
 import React from "react"
