@@ -6,10 +6,12 @@ import Header from './header'
 import Footer from './footer'
 import Link from 'next/link'
 import Loader from './ui/loader'
+import { useRouter } from 'next/navigation'
 
 
 
-export default function LastPlayed({ currentPlaying, lastPlayed, playlist, profile }) {
+const LastPlayed = ({ currentPlaying, lastPlayed, playlist, profile }) => {
+  const router = useRouter()
   const currentSrc =  currentPlaying?.item?.album?.images[0]?.url; 
   const getLastPlayed = () => {
     const artists = lastPlayed.items[0].track.artists
@@ -71,7 +73,7 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist, profi
         <div className='my-2'>
         {
           artists?.map((artist, i)=>(
-            <>
+            <div key={i}>
               <span>
               {artist.name}
               {artists.length - 1 === i ? 
@@ -81,7 +83,7 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist, profi
               </span> 
               }
               </span>
-            </>
+            </div>
           ))
         }
         </div>
@@ -94,6 +96,14 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist, profi
     document.title = currentPlaying ? `Abimbola is listening to ${currentPlaying.item.name}` : `Abimbola last listened to ${lastPlayed.items[0].track.name}`
   },[])
   
+  React.useEffect(()=> {
+    setInterval(() => {
+      router.refresh()
+      // window.location.reload()
+      console.log("refresh???")
+    }, 200000)
+  },[])
+
   return (
     <div 
     style={{
@@ -128,3 +138,5 @@ export default function LastPlayed({ currentPlaying, lastPlayed, playlist, profi
     </div>
   )
 }
+
+export default LastPlayed;

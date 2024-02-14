@@ -96,6 +96,7 @@ export const getCurrentSong = async (client_id,client_secret,refresh_token) => {
       const playlist_id = uri[2]
       playss = await getPlaylist(client_id,client_secret,refresh_token,playlist_id)  
     }
+    console.log(playss, "PLAYSSS")
     return {data, playss};
     // return await res.json()
   } else

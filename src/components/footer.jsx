@@ -5,6 +5,7 @@ import moment from 'moment';
 import Link from 'next/link';
 
 export default function Footer({ currentPlaying, lastPlayed, playlbum, profile}) {
+  console.log(playlbum)
   const userLink = profile.external_urls.spotify
   const [ time, setTime ] = React.useState(moment(lastPlayed.items[0].played_at ).fromNow())
   React.useEffect(()=>{
