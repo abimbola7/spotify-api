@@ -92,16 +92,15 @@ const LastPlayed = ({ currentPlaying, lastPlayed, playlist, profile }) => {
     </Card>
     )
   }
+  
   React.useEffect(()=>{
     document.title = currentPlaying ? `Abimbola is listening to ${currentPlaying.item.name}` : `Abimbola last listened to ${lastPlayed.items[0].track.name}`
   },[])
   
   React.useEffect(()=> {
     setInterval(() => {
-      router.refresh()
-      // window.location.reload()
-      console.log("refresh???")
-    }, 200000)
+      router.refresh();
+    }, 100000)
   },[])
 
   return (
