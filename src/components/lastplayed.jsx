@@ -93,10 +93,14 @@ const LastPlayed = ({ currentPlaying, lastPlayed, playlist, profile }) => {
     )
   }
   
+  React.useEffect(()=>{
+    document.title = currentPlaying ? `Abimbola is listening to ${currentPlaying.item.name}` : `Abimbola last listened to ${lastPlayed.items[0].track.name}`
+  },[])
+  
   React.useEffect(()=> {
     setInterval(() => {
       router.refresh();
-      document.title = currentPlaying ? `Abimbola is listening to ${currentPlaying.item.name}` : `Abimbola last listened to ${lastPlayed.items[0].track.name}`
+      // document.title = currentPlaying ? `Abimbola is listening to ${currentPlaying.item.name}` : `Abimbola last listened to ${lastPlayed.items[0].track.name}`
     }, 100000)
   },[])
 
