@@ -94,8 +94,9 @@ const LastPlayed = ({ currentPlaying, lastPlayed, playlist, profile }) => {
   }
   
   React.useEffect(()=>{
+    console.log("hey", currentPlaying.item.name)
     document.title = currentPlaying ? `Abimbola is listening to ${currentPlaying.item.name}` : `Abimbola last listened to ${lastPlayed.items[0].track.name}`
-  },[])
+  },[currentPlaying, lastPlayed.items])
   
   React.useEffect(()=> {
     setInterval(() => {
