@@ -73,21 +73,21 @@ const LastPlayed = ({ currentPlaying, lastPlayed, playlist, profile }) => {
         <div className='my-2'>
         {
           artists?.map((artist, i)=>(
-            <div key={i}>
-              <span>
-              {artist.name}
-              {artists.length - 1 === i ? 
-              "" : 
-              <span>
-              {","} &nbsp;
+            <>
+              <span key={i}>
+                {artist.name}
+                {artists.length - 1 === i ? 
+                "" : 
+              <span>  
+              {","}{" "}
               </span> 
               }
               </span>
-            </div>
+            </>
           ))
         }
         </div>
-        <h1 className='text-2xl font-medium uppercase'>{ name }</h1>
+        <h1 className='text-xl font-medium uppercase sm:text-2xl'>{ name }</h1>
       </div>
     </Card>
     )
