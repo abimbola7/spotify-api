@@ -14,11 +14,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <NextAuthSessionProvider>
+      {/* <NextAuthSessionProvider> */}
         <body className={`${grotesk.className} bg-[#121212]`}>
           {children}
         </body>
-      </NextAuthSessionProvider>
+      {/* </NextAuthSessionProvider> */}
     </html>
   )
 }
