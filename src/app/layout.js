@@ -1,7 +1,6 @@
 import Header from '@/components/header'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
-import NextAuthSessionProvider from './provider/sessionProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 const grotesk = Space_Grotesk({ subsets: ['latin'] })
@@ -14,11 +13,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      {/* <NextAuthSessionProvider> */}
-        <body className={`${grotesk.className} bg-[#121212]`}>
-          {children}
-        </body>
-      {/* </NextAuthSessionProvider> */}
+      <body className={`${grotesk.className} bg-[#121212]`}>
+        {children}
+      </body>
     </html>
   )
 }
