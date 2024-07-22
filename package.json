@@ -25,6 +25,7 @@
     "querystring": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-icons": "^5.2.1",
     "spotify-web-api-js": "^1.5.2"
   },
   "devDependencies": {

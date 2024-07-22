@@ -5,7 +5,7 @@ import React from "react"
 import queryString from 'query-string';
 const tokenUrl = 'https://accounts.spotify.com/api/token';
 const lastPlayedEndpoint = `https://api.spotify.com/v1/me/player/recently-played?limit=1`;
-const current_song = `https://api.spotify.com/v1/me/player/currently-playing`;
+const current_song = `https://api.spotify.com/v1/me/player/currently-playing?market=NG`;
 const my_profile = `https://api.spotify.com/v1/me`
 
 
@@ -96,15 +96,13 @@ export const getCurrentSong = async (client_id,client_secret,refresh_token) => {
       const playlist_id = uri[2]
       playss = await getPlaylist(client_id,client_secret,refresh_token,playlist_id)  
     }
-    console.log(playss, "PLAYSSS")
     return {data, playss};
-    // return await res.json()
   } else
   if (res.ok && res.status === 204) {
     return "offline"
   } else
   if (!res.ok) {
-    return error
+    return "error"
   }
   // return res.status;
 };

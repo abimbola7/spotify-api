@@ -7,19 +7,23 @@ import Footer from './footer'
 import Link from 'next/link'
 import Loader from './ui/loader'
 import { useRouter } from 'next/navigation'
+import Audioo from './audio'
 
 
 
 const LastPlayed = ({ currentPlaying, lastPlayed, playlist, profile }) => {
   const router = useRouter()
   const currentSrc =  currentPlaying?.item?.album?.images[0]?.url; 
+  
   const getLastPlayed = () => {
-    const artists = lastPlayed.items[0].track.artists
-    const name = lastPlayed.items[0].track.name; 
-    const src = lastPlayed.items[0].track.album.images[0].url;
-    const url = lastPlayed.items[0].track.external_urls.spotify
+    const artists = lastPlayed?.items[0].track.artists
+    const name = lastPlayed?.items[0].track.name; 
+    console.log(name)
+    const src = lastPlayed?.items[0].track.album.images[0].url;
+    const url = lastPlayed?.items[0].track.external_urls.spotify
     return (
       <Card>
+        <Audioo key={"one"}  audio={lastPlayed?.items[0].track.preview_url}/>
         <Link href={url} target="_blank">
           <Image
           src={src}
@@ -52,13 +56,16 @@ const LastPlayed = ({ currentPlaying, lastPlayed, playlist, profile }) => {
       </Card>
     )
   }
+  
   const getCurrentPlayed = () => {
     const artists = currentPlaying.item.artists
     const src = currentPlaying.item.album.images[0].url; 
     const name = currentPlaying.item.name;
+    console.log(name)
     const url = currentPlaying.item.external_urls.spotify
     return (
     <Card>
+      <Audioo key={"one"}  audio={currentPlaying.item.preview_url}/>
       <Link href={url} target="_blank" className='mb-1'>
         <Image
         src={src}
@@ -70,20 +77,20 @@ const LastPlayed = ({ currentPlaying, lastPlayed, playlist, profile }) => {
       </Link>
       <Loader />
       <div className='mt-2 text-center'>
-        <div className='my-2'>
+        <div className='my-2' key={"currentplaying"}>
         {
           artists?.map((artist, i)=>(
-            <>
+            <div key={i} className='inline-block'>
               <span key={i}>
                 {artist.name}
                 {artists.length - 1 === i ? 
                 "" : 
-              <span>  
-              {","}{" "}
-              </span> 
+                <span>  
+                {","}{" "}
+                </span> 
               }
               </span>
-            </>
+            </div>
           ))
         }
         </div>
@@ -123,7 +130,8 @@ const LastPlayed = ({ currentPlaying, lastPlayed, playlist, profile }) => {
           {
             typeof currentPlaying === "object" ? (
               getCurrentPlayed()
-            ) : ( 
+            ) :
+             ( 
               getLastPlayed()
             )
           }
