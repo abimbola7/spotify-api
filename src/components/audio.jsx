@@ -18,6 +18,7 @@ const Audioo = ({ audio }) => {
   }
 
   React.useEffect(() => {
+    console.log(audio)
     const audioId = document.getElementById('spotify');
     setSpotifyControl(audioId);
 
@@ -36,7 +37,14 @@ const Audioo = ({ audio }) => {
         audioId.removeEventListener('ended', handleEnded);
       };
     }
-  }, []);
+  }, [audio]);
+
+
+  React.useEffect(() => {
+    if (spotifyControl) {
+      spotifyControl.load();
+    }
+  }, [audio, spotifyControl]);
 
   return (
     <div 
