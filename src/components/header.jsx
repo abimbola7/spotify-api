@@ -1,7 +1,6 @@
 "use client"
 import Link from 'next/link'
 import React from 'react'
-import moment from 'moment'
 
 export default function Header({ currentPlaying, lastPlayed, playlist }) {
   return (

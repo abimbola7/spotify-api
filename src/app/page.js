@@ -3,6 +3,7 @@
 import LastPlayed from "@/components/lastplayed"
 import React from "react"
 import queryString from 'query-string';
+// /import ToastUi from "@/components/ui/toastui";
 const tokenUrl = 'https://accounts.spotify.com/api/token';
 const lastPlayedEndpoint = `https://api.spotify.com/v1/me/player/recently-played?limit=1`;
 const current_song = `https://api.spotify.com/v1/me/player/currently-playing?market=NG`;
@@ -64,7 +65,7 @@ export const getPlaylist = async (client_id, client_secret, refresh_token, id) =
     client_id,
     client_secret,
     refresh_token,
-  );
+  );  
   return await res.json();
 };
 
@@ -94,7 +95,7 @@ export const getCurrentSong = async (client_id,client_secret,refresh_token) => {
       playss = await getAlbum(client_id,client_secret,refresh_token,album_id)  
     } else if (uri[1] === "playlist"){
       const playlist_id = uri[2]
-      playss = await getPlaylist(client_id,client_secret,refresh_token,playlist_id)  
+      playss = await getPlaylist(client_id,client_secret,refresh_token,playlist_id)
     }
     return {data, playss};
   } else
@@ -115,11 +116,14 @@ export default async function Home() {
   const lastPlayedData = await getLastPlayed(clientId, clientSecret, refresh_token)
   const profile = await getProfile(clientId, clientSecret, refresh_token)
   return (
-      <LastPlayed
-      currentPlaying={currentPlayingData}
-      lastPlayed={lastPlayedData}
-      playlist={playss}
-      profile={profile}
-      />
+      <>
+        {/* <ToastUi /> */}
+        <LastPlayed
+        currentPlaying={currentPlayingData}
+        lastPlayed={lastPlayedData}
+        playlist={playss}
+        profile={profile}
+        />
+      </>
   )
 }
