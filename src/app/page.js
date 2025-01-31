@@ -59,14 +59,38 @@ export const getLastPlayed = async (client_id, client_secret, refresh_token) => 
   return await res.json();
 };
 
+// export const getPlaylist = async (client_id, client_secret, refresh_token, id) => {
+//   await makeApiRequest(
+//     'https://api.spotify.com/v1/playlists/' + id,
+//     client_id,
+//     client_secret,
+//     refresh_token,
+//   ).then((response) => {
+//     console.log(response, "RESPONSEEE")
+//     return response.json()
+//   }).catch(error => {
+//     console.error(error, "ERROR") 
+//   })
+// };
+
 export const getPlaylist = async (client_id, client_secret, refresh_token, id) => {
-  const res = await makeApiRequest(
-    'https://api.spotify.com/v1/playlists/' + id,
-    client_id,
-    client_secret,
-    refresh_token,
-  );  
-  return await res.json();
+  try {
+    const response = await makeApiRequest(
+      'https://api.spotify.com/v1/playlists/' + id,
+      client_id,
+      client_secret,
+      refresh_token
+    );
+
+    if (!response.ok) {
+      throw new Error('error');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error(error, "ERROR");
+    return "error";
+  }
 };
 
 export const getAlbum = async (client_id, client_secret, refresh_token, id) => {

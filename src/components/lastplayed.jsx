@@ -58,7 +58,6 @@ const LastPlayed = ({ currentPlaying, lastPlayed, playlist, profile }) => {
   }
   
   const getCurrentPlayed = () => {
-    console.log(currentPlaying, "CURRENT PLAYING");
     const artists = currentPlaying.item.artists
     const src = currentPlaying.item.album.images[0].url; 
     const name = currentPlaying.item.name;

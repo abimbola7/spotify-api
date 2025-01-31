@@ -5,9 +5,7 @@ import moment from 'moment';
 import Link from 'next/link';
 
 export default function Footer({ currentPlaying, lastPlayed, playlbum, profile}) {
-  console.log(playlbum)
   const userLink = profile.external_urls.spotify
-  console.log(userLink, "USERLINK");
   const [ time, setTime ] = React.useState(moment(lastPlayed.items[0].played_at ).fromNow())
   React.useEffect(()=>{
     const getDate = () => {
@@ -21,14 +19,14 @@ export default function Footer({ currentPlaying, lastPlayed, playlbum, profile})
   }, [])
 
   return (
-    <div className='flex flex-col sm:flex-row text-[#e6e6e6] mb-2 items-center px-3 justify-between mx-auto w-full'>
+    <div className={`flex flex-col sm:flex-row text-[#e6e6e6] mb-2 items-center px-3 ${playlbum !== 'error' ? 'justify-between' : 'justify-center'} mx-auto w-full `}>
       <div className='text-left sm:text-center text-sm sm:w-[32%]'>
         <p>Songs I&apos;m listening to on 
         <Link href={userLink} target="_blank" className='text-[#1DB954] duration-200 transition-colors text-[#1DB954] hover:text-[#1DB954]'> Spotify</Link>
         </p>
       </div>
       {
-        currentPlaying && (
+        currentPlaying && playlbum !== "error" && (
           <div className='flex space-x-2 truncate w-full'>
             <div className='overflow-hidden  mx-auto'>
               <span>Playing from </span>
@@ -36,7 +34,7 @@ export default function Footer({ currentPlaying, lastPlayed, playlbum, profile})
               href={playlbum?.external_urls?.spotify} 
               target="_blank" 
               className='text-[#1DB954] duration-200 transition-colors hover:text-[#1DB954]'>
-                {playlbum.name}
+                {playlbum?.name}
               </Link>
             </div>
           </div>    
