@@ -80,13 +80,13 @@ const LastPlayed = ({ currentPlaying, lastPlayed, playlist, profile }) => {
         <div className='my-2' key={"currentplaying"}>
         {
           artists?.map((artist, i)=>(
-            <div key={i} className='inline-block'>
+            <div key={i} className='inline-block text-sm'>
               <span key={i}>
                 {artist.name}
                 {artists.length - 1 === i ? 
                 "" : 
                 <span>  
-                {","}{" "}
+                {", "}{" "}
                 </span> 
               }
               </span>

@@ -6,6 +6,8 @@ import Link from 'next/link';
 
 export default function Footer({ currentPlaying, lastPlayed, playlbum, profile}) {
   const userLink = profile.external_urls.spotify
+  const image = playlbum?.images[0]?.url
+  console.log(image);
   const [ time, setTime ] = React.useState(moment(lastPlayed.items[0].played_at ).fromNow())
   React.useEffect(()=>{
     const getDate = () => {
@@ -19,7 +21,7 @@ export default function Footer({ currentPlaying, lastPlayed, playlbum, profile})
   }, [])
 
   return (
-    <div className={`flex flex-col sm:flex-row text-[#e6e6e6] mb-2 items-center px-3 ${playlbum !== 'error' ? 'justify-between' : 'justify-center'} mx-auto w-full `}>
+    <div className={`flex flex-col sm:flex-row text-[#e6e6e6] mb-2 items-center px-3 ${playlbum !== 'error' ? 'justify-around' : 'justify-center'} mx-auto w-full mt-3`}>
       <div className='text-left sm:text-center text-sm sm:w-[32%]'>
         <p>Songs I&apos;m listening to on 
         <Link href={userLink} target="_blank" className='text-[#1DB954] duration-200 transition-colors text-[#1DB954] hover:text-[#1DB954]'> Spotify</Link>
@@ -27,14 +29,20 @@ export default function Footer({ currentPlaying, lastPlayed, playlbum, profile})
       </div>
       {
         currentPlaying && playlbum !== "error" && (
-          <div className='flex space-x-2 truncate w-full'>
-            <div className='overflow-hidden  mx-auto'>
+          <div className='flex space-x-2 truncate w-fit'>
+            <div className='overflow-hidden mx-auto  w-fit flex items-center justify-center gap-3'>
               <span>Playing from </span>
               <Link 
               href={playlbum?.external_urls?.spotify} 
               target="_blank" 
-              className='text-[#1DB954] duration-200 transition-colors hover:text-[#1DB954]'>
-                {playlbum?.name}
+              className='text-[#1DB954] duration-200 transition-colors hover:text-[#1DB954] flex items-center justify-center gap-2'>
+                <img 
+                src={image}
+                className='w-8 h-8 object-center object-cover' 
+                alt={playlbum?.name}/>
+                <span>
+                  {playlbum?.name}
+                </span>
               </Link>
             </div>
           </div>    
