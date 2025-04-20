@@ -38,7 +38,7 @@ export default function Footer({ currentPlaying, lastPlayed, playlbum, profile})
               className='text-[#1DB954] duration-200 transition-colors hover:text-[#1DB954] flex items-center justify-center gap-2'>
                 <img 
                 src={image}
-                className='w-8 h-8 object-center object-cover' 
+                className='w-8 h-8 object-center object-cover rounded' 
                 alt={playlbum?.name}/>
                 <span>
                   {playlbum?.name}
