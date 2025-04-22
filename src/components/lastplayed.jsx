@@ -118,7 +118,7 @@ const LastPlayed = ({ currentPlaying, lastPlayed, playlist, profile }) => {
       backgroundBlendMode : "darken"
       
     }}
-    className={`w-full bg-cover bg-no-repeat min-h-screen bg-center`}>
+    className={`w-full bg-cover bg-no-repeat min-h-screen bg-center overflow-hidden`}>
       <div className='flex flex-col w-full min-h-screen bg-no-repeat bg-cover backdrop-blur-lg'>
         <Header
           currentPlaying={currentPlaying}
