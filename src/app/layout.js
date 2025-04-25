@@ -13,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${grotesk.className} bg-[#121212] overflow-hidden`}>
+      <body className={`${grotesk.className} bg-[#121212]`}>
         {children}
       </body>
     </html>

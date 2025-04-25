@@ -21,7 +21,7 @@ export default function Footer({ currentPlaying, lastPlayed, playlbum, profile})
   }, [])
 
   return (
-    <div className={`flex flex-col sm:flex-row text-[#e6e6e6] mb-2 items-center px-3 ${playlbum !== 'error' ? 'justify-around' : 'justify-center'} mx-auto w-full mt-3`}>
+    <div className={`flex flex-col sm:flex-row text-[#e6e6e6] mb-2 items-center px-1 sm:px-3 ${playlbum !== 'error' ? 'justify-around' : 'justify-center'} mx-auto w-full mt-3`}>
       <div className='text-left sm:text-center text-sm sm:w-[32%]'>
         <p>Songs I&apos;m listening to on 
         <Link href={userLink} target="_blank" className='text-[#1DB954] duration-200 transition-colors text-[#1DB954] hover:text-[#1DB954]'> Spotify</Link>
@@ -30,7 +30,7 @@ export default function Footer({ currentPlaying, lastPlayed, playlbum, profile})
       {
         currentPlaying && playlbum !== "error" && (
           <div className='flex space-x-2 truncate w-fit'>
-            <div className='overflow-hidden mx-auto  w-fit flex items-center justify-center gap-3'>
+            <div className='flex flex-wrap items-center justify-center gap-3 mx-auto overflow-hidden w-fit'>
               <span>Playing from </span>
               <Link 
               href={playlbum?.external_urls?.spotify} 
@@ -38,7 +38,7 @@ export default function Footer({ currentPlaying, lastPlayed, playlbum, profile})
               className='text-[#1DB954] duration-200 transition-colors hover:text-[#1DB954] flex items-center justify-center gap-2'>
                 <img 
                 src={image}
-                className='w-8 h-8 object-center object-cover rounded' 
+                className='object-cover object-center w-8 h-8 rounded' 
                 alt={playlbum?.name}/>
                 <span>
                   {playlbum?.name}
