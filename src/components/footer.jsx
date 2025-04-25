@@ -6,8 +6,9 @@ import Link from 'next/link';
 
 export default function Footer({ currentPlaying, lastPlayed, playlbum, profile}) {
   const userLink = profile.external_urls.spotify
-  const image = playlbum?.images[0]?.url
-  console.log(image);
+  // const image = playlbum?.images[0]?.url || ""
+  // const image = playlbum
+  // console.log(image);
   const [ time, setTime ] = React.useState(moment(lastPlayed.items[0].played_at ).fromNow())
   React.useEffect(()=>{
     const getDate = () => {
@@ -37,7 +38,7 @@ export default function Footer({ currentPlaying, lastPlayed, playlbum, profile})
               target="_blank" 
               className='text-[#1DB954] duration-200 transition-colors hover:text-[#1DB954] flex items-center justify-center gap-2'>
                 <img 
-                src={image}
+                src={playlbum?.images[0]?.url}
                 className='object-cover object-center w-8 h-8 rounded' 
                 alt={playlbum?.name}/>
                 <span>
